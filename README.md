@@ -1,147 +1,126 @@
-📺 HLS Multi-Program Bitrate Monitor
+# 📺 HLS Multi-Program Bitrate Monitor
 
-A modern web application to analyze, monitor, and test HLS streams with multi-program + multi-variant support.
+A modern web application to **analyze, monitor, and test HLS streams** with full support for multi-program + multi-variant HLS playlists—optimized for both desktop and mobile.
 
-🚀 Overview
+---
 
-The HLS Multi-Program Bitrate Monitor is a fast, compact web application designed to inspect and monitor HLS .m3u8 playlists.
+## 🚀 Overview
+
+The **HLS Multi-Program Bitrate Monitor** is a fast, compact, browser-based tool built to inspect `.m3u8` playlists and monitor real-time streaming metrics.
+
 It supports:
 
-✔ Multi-program M3U lists
-✔ Adaptive bitrate (ABR) HLS streams
-✔ Real-time segment bitrate analysis
-✔ Resolution & bandwidth switching
-✔ Detailed QoE metrics (buffering, latency, dropped frames, stalls)
-✔ Program & Variant selection with Select2 UI
-✔ URL history manager
-✔ Theme Switcher (Dark / Light)
-✔ Compact mobile-first UI
-✔ Fully installable PWA App
+✔ Multi-program M3U channel lists  
+✔ Adaptive bitrate (ABR) HLS streams  
+✔ Real-time segment bitrate analysis  
+✔ Resolution & bandwidth switching  
+✔ Detailed QoE metrics (latency, stalls, buffers, dropped frames)  
+✔ Program & Variant selection (Select2 UI)  
+✔ URL History manager  
+✔ Responsive Light/Dark theme  
+✔ Ultra-compact mobile layout (no scrolling)  
+✔ Fully installable **PWA Application**
 
-Built with Vanilla JS + Hls.js + Select2 and fully optimized for desktop & mobile without scrolling.
+Built with **Vanilla JS + Hls.js + Select2**, ensuring speed, simplicity, and maximum compatibility.
 
-✨ Features
-🔍 Playlist Parsing
+---
 
-Detects Master HLS playlists
+## ✨ Features
 
-Detects Single-bitrate HLS streams
+### 🔍 Playlist Parsing
 
-Detects Multi-Channel M3U lists
+- Detects HLS master playlists  
+- Detects single-bitrate media playlists  
+- Detects multi-channel M3U lists  
+- Automatically extracts programs and variants  
 
-Automatically extracts Programs & Variants
+---
 
-🎥 Playback & Analysis
+### 🎥 Playback & Stream Analysis
 
-Real-time bitrate calculation (accurate segment-based HEAD analysis)
+- **Accurate bitrate measurement** using HEAD requests  
+- **Current segment bitrate** (Kbps)  
+- **Average bitrate** over playback duration  
+- **Live resolution detection**  
+- **Segment count**  
+- **Live buffer duration**  
+- **Dropped video frames**  
+- **Playback time counter**  
+- **Auto ABR mode**  
+- Manual variant selection with metadata:
+  - Resolution  
+  - Codec  
+  - Bitrate  
 
-Live resolution detection
+---
 
-Average bitrate over time
+### 📱 Mobile-Friendly + Compact Layout
 
-Segment count
+- Zero vertical scrolling  
+- Smart adaptive layout  
+- Wide Select2 dropdowns  
+- Touch-friendly controls  
 
-Live buffer size
+---
 
-Dropped frames
+### 🎨 Modern UI
 
-Playback time
+- Select2-enhanced dropdowns  
+- Smooth Light/Dark theme toggle  
+- Vibrant, modern design  
+- Fully customizable via `style.css`  
 
-Auto ABR or manual variant selection
+---
 
-Works even with multi-program streams
+### 💾 URL History Manager
 
-📱 Mobile Friendly + Compact Layout
+- Stores last **10 URLs**  
+- Dropdown for quick selection  
+- Clear History option  
+- Full App Reset  
+- Persistent via LocalStorage  
 
-No vertical scrolling needed
+---
 
-Program/Variant fields stay visible
+### 📦 Progressive Web App (PWA)
 
-Buttons & inputs optimized for touchscreen
+- Installable on:
+  - Android  
+  - Desktop (Chrome, Edge, Brave)  
+  - Firefox Mobile  
+- Works offline after installation  
+- Includes:
+  - `manifest.json`  
+  - `service-worker.js`  
+  - App icons (192×192, 512×512)
 
-🎨 Modern UI
+---
 
-Select2 enhanced dropdowns
+## 📸 Screenshots
 
-Vibrant colors
+Located in the `/screenshots/` directory:
 
-Theme switcher
+### **Screenshot 1**
+![Screenshot 1](screenshots/Screenshot-1.png)
 
-Fully customizable via style.css
+### **Screenshot 2**
+![Screenshot 2](screenshots/Screenshot-2.png)
 
-💾 URL History
+### **Screenshot 3**
+![Screenshot 3](screenshots/Screenshot-3.png)
 
-Saves last 10 used URLs
+### **Screenshot 4**
+![Screenshot 4](screenshots/Screenshot-4.png)
 
-Quick dropdown to select recent inputs
+---
 
-Clear history & reset app button
+## 📱 Installing as a PWA
 
-📦 PWA (Progressive Web App)
+To install:
 
-Installable on Android, Desktop, Chrome, Edge, Firefox
+1. Open the app in Chrome/Edge/Firefox  
+2. Click **Install App** when prompted  
+3. OR open the browser menu → **Install**  
+4. It installs with its own icon + offline support  
 
-Works offline after installation
-
-Responsive app icon (192×192)
-
-manifest.json + service-worker.js included
-
-📱 Install as PWA
-
-After loading the app:
-
-Click Install App (browser prompt)
-
-Or open browser menu → Install
-
-App will install with its own icon & window
-
-Works offline after first load
-
-📂 Project Structure
-/
-│── index.html
-│── style.css
-│── script.js
-│── manifest.json
-│── service-worker.js
-│── icons/
-│     ├── 192x192.png
-│     └── 512x512.png
-└── README.md
-
-🔧 Technologies Used
-
-JavaScript (Vanilla)
-
-Hls.js
-
-Select2
-
-HTML5 Video
-
-CSS3 / Custom Themes
-
-PWA APIs
-
-LocalStorage
-
-🎯 Roadmap (Future Features)
-
-Thumbnail preview of segments
-
-Save & export logs
-
-WebRTC test mode
-
-Offline local playlist testing
-
-Additional QoE metrics
-
-Multi-window monitoring layout
-
-🤝 Contributing
-
-Pull requests are welcome!
-For major changes, please open an issue first to discuss what you would like to add or modify.
+---
