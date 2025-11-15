@@ -1,126 +1,115 @@
-# 📺 HLS Multi-Program Bitrate Monitor
+# 📺 HLS Multi-Program Bitrate Monitor  
+### **Live Demo:** https://hls.plaasvision.com/
 
-A modern web application to **analyze, monitor, and test HLS streams** with full support for multi-program + multi-variant HLS playlists—optimized for both desktop and mobile.
-
----
+A modern, compact, and PWA-enabled web application to analyze, monitor, and test HLS streams — with full multi-program & multi-variant support.
 
 ## 🚀 Overview
-
-The **HLS Multi-Program Bitrate Monitor** is a fast, compact, browser-based tool built to inspect `.m3u8` playlists and monitor real-time streaming metrics.
+The **HLS Multi-Program Bitrate Monitor** is a powerful browser-based HLS analysis tool built for IPTV engineers, broadcasters, OTT testers, developers, and streaming researchers.
 
 It supports:
-
-✔ Multi-program M3U channel lists  
-✔ Adaptive bitrate (ABR) HLS streams  
-✔ Real-time segment bitrate analysis  
-✔ Resolution & bandwidth switching  
-✔ Detailed QoE metrics (latency, stalls, buffers, dropped frames)  
-✔ Program & Variant selection (Select2 UI)  
-✔ URL History manager  
-✔ Responsive Light/Dark theme  
-✔ Ultra-compact mobile layout (no scrolling)  
-✔ Fully installable **PWA Application**
-
-Built with **Vanilla JS + Hls.js + Select2**, ensuring speed, simplicity, and maximum compatibility.
-
----
+- ✔ Master playlists
+- ✔ Single-bitrate `.m3u8`
+- ✔ Multi-channel `.m3u` lists
+- ✔ Direct HLS/TS streams
 
 ## ✨ Features
+### 🔍 Smart Playlist Detection
+- Detects master, single, multi-program, and direct streams
+- Auto-extracts Programs & Variants
 
-### 🔍 Playlist Parsing
+### 🎥 Real-Time Analysis
+- Accurate segment bitrate (HEAD Content-Length method)
+- Average bitrate
+- Resolution switching
+- Segment count
+- ABR logs
 
-- Detects HLS master playlists  
-- Detects single-bitrate media playlists  
-- Detects multi-channel M3U lists  
-- Automatically extracts programs and variants  
+### 📊 QoE Metrics
+- Stall count
+- Dropped frames
+- Live latency
+- Buffer size
+- Playback duration
 
----
+### 🎨 UI / UX
+- Compact layout
+- Select2 for Programs & Variants
+- URL history system
+- Theme switcher (Dark / Light)
+- Mobile-first (no scrolling)
 
-### 🎥 Playback & Stream Analysis
+### 📱 PWA Ready
+- Installable on Android, iOS, Windows, Mac, Linux
+- Offline support
+- Includes icons + manifest.json + service worker
 
-- **Accurate bitrate measurement** using HEAD requests  
-- **Current segment bitrate** (Kbps)  
-- **Average bitrate** over playback duration  
-- **Live resolution detection**  
-- **Segment count**  
-- **Live buffer duration**  
-- **Dropped video frames**  
-- **Playback time counter**  
-- **Auto ABR mode**  
-- Manual variant selection with metadata:
-  - Resolution  
-  - Codec  
-  - Bitrate  
+## 🖼️ Screenshots
+Screenshots stored inside `/screenshots/` directory:
+- Screenshot-1.png  
+- Screenshot-2.png  
+- Screenshot-3.png  
+- Screenshot-4.png  
 
----
+## 📂 Project Structure
+```
+/
+│── index.html
+│── style.css
+│── script.js
+│── manifest.json
+│── service-worker.js
+│── icons/
+│     ├── 192x192.png
+│     └── 512x512.png
+│── screenshots/
+│     ├── Screenshot-1.png
+│     ├── Screenshot-2.png
+│     ├── Screenshot-3.png
+│     └── Screenshot-4.png
+└── README.md
+```
 
-### 📱 Mobile-Friendly + Compact Layout
+## 🔧 Technologies
+Vanilla JS • Hls.js • Select2 • CSS3 • LocalStorage • PWA APIs • NGINX
 
-- Zero vertical scrolling  
-- Smart adaptive layout  
-- Wide Select2 dropdowns  
-- Touch-friendly controls  
+## 🛠️ Deployment
+Place project in:
+```
+/var/www/html/hls-analyzer-player
+```
 
----
+### Recommended NGINX configuration:
+```
+server {
+    server_name hls.plaasvision.com;
 
-### 🎨 Modern UI
+    root /var/www/html/hls-analyzer-player;
+    index index.html;
 
-- Select2-enhanced dropdowns  
-- Smooth Light/Dark theme toggle  
-- Vibrant, modern design  
-- Fully customizable via `style.css`  
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
 
----
+    location /service-worker.js {
+        add_header Cache-Control "no-cache";
+    }
 
-### 💾 URL History Manager
+    location /manifest.json {
+        add_header Cache-Control "no-cache";
+    }
+}
+```
 
-- Stores last **10 URLs**  
-- Dropdown for quick selection  
-- Clear History option  
-- Full App Reset  
-- Persistent via LocalStorage  
+## 🧭 Roadmap
+- Thumbnails
+- Export logs
+- WebRTC mode
+- Multi-window analyzer
+- API for remote monitoring
 
----
+## 🤝 Contributing
+Pull requests welcome!
 
-### 📦 Progressive Web App (PWA)
-
-- Installable on:
-  - Android  
-  - Desktop (Chrome, Edge, Brave)  
-  - Firefox Mobile  
-- Works offline after installation  
-- Includes:
-  - `manifest.json`  
-  - `service-worker.js`  
-  - App icons (192×192, 512×512)
-
----
-
-## 📸 Screenshots
-
-Located in the `/screenshots/` directory:
-
-### **Screenshot 1**
-![Screenshot 1](screenshots/Screenshot-1.png)
-
-### **Screenshot 2**
-![Screenshot 2](screenshots/Screenshot-2.png)
-
-### **Screenshot 3**
-![Screenshot 3](screenshots/Screenshot-3.png)
-
-### **Screenshot 4**
-![Screenshot 4](screenshots/Screenshot-4.png)
-
----
-
-## 📱 Installing as a PWA
-
-To install:
-
-1. Open the app in Chrome/Edge/Firefox  
-2. Click **Install App** when prompted  
-3. OR open the browser menu → **Install**  
-4. It installs with its own icon + offline support  
-
----
+## 🧑‍💻 Developer
+**Aourongajab Abir**  
+GitHub: https://github.com/aouronga
