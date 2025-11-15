@@ -1,0 +1,684 @@
+/* =======================================
+   THEME VARIABLES (LIGHT & DARK)
+   ======================================= */
+
+/* Light (Sublime-ish but bright) */
+:root {
+  --bg: #f4f5fb;
+  --bg-gradient: radial-gradient(circle at top, #ffffff 0%, #e6ebff 60%, #dde3fb 100%);
+  --card: #ffffff;
+  --header-bg: linear-gradient(90deg, #6366f1, #3b82f6);
+  --header-text: #ffffff;
+
+  --text: #0b1020;
+  --muted: #9ca3af;
+
+  --accent: #6366f1;
+  --accent-light: #3b82f6; /* Added for gradient consistency */
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent-soft-strong: rgba(99, 102, 241, 0.22);
+
+  --border: rgba(148, 163, 184, 0.6);
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.16);
+
+  --success: #22c55e;
+  --danger: #ef4444;
+
+  --log-bg: #0f172a;
+  --log-text: #e5e7eb;
+}
+
+/* Dark (Sublime Text-style) */
+:root[data-theme="dark"] {
+  --bg: #020617;
+  --bg-gradient: radial-gradient(circle at top, #1f2937 0%, #020617 55%, #020617 100%);
+  --card: #020617;
+  --header-bg: linear-gradient(90deg, #1d4ed8, #a855f7);
+  --header-text: #e5e7eb;
+
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+
+  --accent: #a855f7;
+  --accent-light: #1d4ed8; /* Added for gradient consistency */
+  --accent-soft: rgba(168, 85, 247, 0.16);
+  --accent-soft-strong: rgba(168, 85, 247, 0.28);
+
+  --border: rgba(75, 85, 99, 0.9);
+  --shadow-soft: 0 12px 35px rgba(15, 23, 42, 0.9);
+
+  --success: #22c55e;
+  --danger: #f97373;
+
+  --log-bg: #020617;
+  --log-text: #e5e7eb;
+}
+
+/* =======================================
+   PAGE LAYOUT
+   ======================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =======================================
+   HEADER
+   ======================================= */
+
+header {
+  width: 100%;
+  background: var(--header-bg);
+  color: var(--header-text);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.4);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 650;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* chip style button (dark toggle, URL) */
+.chip-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.2);
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(15, 23, 42, 0.25);
+  color: var(--header-text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
+}
+
+.chip-btn.small {
+  font-size: 11px;
+  padding: 2px 8px;
+}
+
+.chip-btn:hover {
+  background: rgba(15, 23, 42, 0.5);
+  box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.25);
+}
+.chip-btn:active {
+  transform: scale(0.96);
+}
+
+/* =======================================
+   MAIN CONTAINER
+   ======================================= */
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 14px auto 18px;
+  padding: 12px 14px 16px;
+  background: var(--card);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =======================================
+   CONTROLS
+   ======================================= */
+
+.controls {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+/* Layout proportions for desktop */
+.controls .url-input-container,
+.controls .select2-container,
+.controls button {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.controls .url-input-container {
+  flex: 2.1 1 0;
+  position: relative; /* For history dropdown */
+}
+.controls .select2-container {
+  flex: 1.1 1 0;
+}
+.controls button:not(.chip-btn):not(.history-btn) {
+  flex: 0 0 76px;
+}
+
+
+/* URL Input Group (Input + History + Clear Button) */
+.url-input-container {
+    display: flex;
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.04);
+    transition: border 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.url-input-container:focus-within {
+    border-color: var(--accent);
+    background: rgba(15, 23, 42, 0.07);
+    box-shadow: 0 0 0 1px var(--accent-soft-strong);
+}
+
+/* URL input */
+input[type="url"] {
+  background: transparent;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  flex-grow: 1;
+}
+input[type="url"]::placeholder {
+  color: var(--muted);
+}
+
+/* History/Clear Button Base Class */
+.history-btn {
+    flex-shrink: 0;
+    width: 38px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.18s ease, color 0.18s ease;
+    border-radius: 0; /* Ensures buttons are flush */
+}
+
+/* Clear Button (specific style) */
+.clear-btn {
+    opacity: 0.7;
+    color: var(--danger);
+}
+.clear-btn:hover {
+    opacity: 1;
+    background: var(--accent-soft);
+}
+
+/* History Button (rightmost) specific style - uses last-child selector */
+.history-btn:last-child {
+    border-radius: 0 8px 8px 0; /* Adds right radius back to the rightmost button (History) */
+}
+
+.history-btn svg {
+    display: block;
+    margin: auto;
+}
+.history-btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+/* History Dropdown (Modal/Popup replacement) */
+.history-dropdown {
+    position: absolute;
+    top: 100%; /* Below the input group */
+    left: 0;
+    right: 0;
+    z-index: 10;
+    margin-top: 4px;
+    background: var(--card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.45);
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+#historyList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#historyList li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+}
+
+#historyList li:last-child {
+    border-bottom: none;
+}
+
+#historyList li:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+#historyList li.empty {
+    cursor: default;
+    color: var(--muted);
+    text-align: center;
+    font-style: italic;
+    background: transparent;
+}
+
+
+/* Buttons (Parse/Stop/Reset) */
+button:not(.chip-btn):not(.history-btn) {
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(145deg, var(--accent), var(--accent-light));
+  color: #f9fafb;
+  font-size: 12px;
+  font-weight: 600;
+  height: 36px;
+  cursor: pointer;
+  padding: 0 12px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px var(--accent-soft-strong);
+  transition: transform 0.08s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+button:not(.chip-btn):not(.history-btn):hover {
+  filter: brightness(1.03);
+  box-shadow: 0 0 0 1px var(--accent-soft-strong), 0 3px 12px var(--accent-soft-strong);
+}
+button:not(.chip-btn):not(.history-btn):active {
+  transform: scale(0.96);
+}
+
+/* Stop button */
+button.stop {
+  background: linear-gradient(145deg, var(--danger), #b91c1c);
+  box-shadow: 0 2px 10px rgba(248, 113, 113, 0.4);
+}
+
+/* Reset button styling (same as load/parse, but you could give it a unique style if desired) */
+#resetAppBtn {
+    /* uses default button styling */
+}
+
+/* =======================================
+   CURRENT URL TOGGLE
+   ======================================= */
+
+.playing-url {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin: 6px 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.playing-url .url-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.playing-url .url-text .sep {
+  opacity: 0.6;
+}
+
+#playingLink {
+  color: var(--success);
+  text-decoration: none;
+  word-break: break-all;
+  max-width: 100%;
+}
+#playingLink:hover {
+  text-decoration: underline;
+}
+
+#playingLink span [hidden="hidden"], #playingLink span [hidden]{
+  display: none !important;
+}
+
+/* =======================================
+   VIDEO
+   ======================================= */
+
+video {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  background: #000;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  box-shadow: 0 0 18px rgba(15, 23, 42, 0.7);
+}
+
+/* =======================================
+   INFO GRID (UPDATED FOR 9 ITEMS)
+   ======================================= */
+
+.grid {
+  display: grid;
+  /* Reduced min-width to 110px to accommodate more columns on desktop */
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); 
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.info {
+  background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
+  border-radius: 8px;
+  padding: 6px 8px;
+  text-align: center;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.info h3 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 3px;
+}
+
+.info div {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.info span {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* =======================================
+   LOG WINDOW
+   ======================================= */
+
+.log {
+  background: var(--log-bg);
+  border-radius: 8px;
+  padding: 6px 8px;
+  height: 96px;
+  overflow-y: auto;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 11px;
+  color: var(--log-text);
+  white-space: pre-wrap;
+  border: 1px solid rgba(30, 64, 175, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.8);
+}
+
+/* =======================================
+   FOOTER
+   ======================================= */
+
+.footer {
+  margin-top: 6px;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+}
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* =======================================
+   SELECT2 STYLING
+   ======================================= */
+
+.select2-container {
+  width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single {
+  height: 36px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 2px 6px !important;
+  font-size: 13px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--text) !important;
+  padding-left: 2px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 100% !important;
+  right: 4px !important;
+}
+
+/* Hover/Focus */
+.select2-container--default .select2-selection--single:hover,
+.select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 1px var(--accent-soft-strong);
+}
+
+/* Dropdown width/height for desktop */
+.select2-dropdown {
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.55) !important;
+}
+
+/* Dark Mode fix for Select2 contrast */
+:root[data-theme="dark"] .select2-dropdown {
+  background-color: var(--card) !important;
+}
+
+:root[data-theme="dark"] .select2-results__option--highlighted {
+  background: var(--accent) !important; /* Accent background */
+  color: #fff !important; /* Pure white text for better contrast */
+}
+
+:root[data-theme="dark"] .select2-results__option--highlighted .variant-result .variant-details {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+/* END Dark Mode fix */
+
+@media (min-width: 768px) {
+  .select2-dropdown {
+    min-width: 420px !important;
+    max-width: 560px !important;
+    width: auto !important;
+  }
+
+  .select2-results__options {
+    max-height: 360px !important;
+    min-height: 240px !important;
+    overflow-y: auto !important;
+    padding: 4px 0 !important;
+  }
+}
+
+/* For mobile: full-width dropdown */
+@media (max-width: 767px) {
+  .select2-dropdown {
+    min-width: 100% !important;
+    width: 100% !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+
+  .select2-results__options {
+    max-height: 220px !important;
+    min-height: 140px !important;
+  }
+}
+
+.select2-results__option {
+  padding: 8px 10px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+}
+
+.select2-results__option--highlighted {
+  background: var(--accent) !important;
+  color: #f9fafb !important;
+}
+
+/* Custom Select2 Variant Styling */
+.variant-result {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3 !important;
+}
+.variant-result .variant-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+.variant-result .variant-details {
+  font-size: 10px;
+  color: var(--muted);
+  display: flex;
+  gap: 10px;
+  margin-top: 2px;
+}
+.select2-results__option--highlighted .variant-result .variant-details {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+
+/* =======================================
+   RESPONSIVE BEHAVIOUR
+   ======================================= */
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 100%;
+    margin: 10px 8px 16px;
+    padding: 10px 10px 12px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  .controls .url-input-container {
+    flex: 1 1 100%;
+  }
+
+  /* Program and Variant side-by-side */
+  .controls .select2-container {
+    flex-basis: calc(50% - 3px);
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  /* Target Load, Stop, and Reset buttons to be side-by-side (33.33%) */
+  .controls button:not(.chip-btn):not(.history-btn) {
+    flex-basis: calc(33.333% - 4px); /* Three buttons side-by-side */
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: none;
+  }
+  
+  /* UPDATED: Info grid for mobile */
+  .grid {
+    /* Auto-fit to 3 columns on smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+  }
+
+  video {
+    max-height: 210px;
+  }
+
+  .log {
+    height: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 14px;
+  }
+
+  .header-inner {
+    padding: 6px 10px;
+  }
+
+  .info div {
+    font-size: 14px;
+  }
+
+  video {
+    max-height: 190px;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+  }
+  .controls .select2-container {
+    flex-basis: 100%; /* Program and Variant full width on very small screens */
+  }
+
+  /* Load, Stop, Reset buttons still share 33.3% on small screens */
+}
+
+/* Custom class for JS toggle to hide the URL text */
+.url-hidden {
+  display: none !important;
+}

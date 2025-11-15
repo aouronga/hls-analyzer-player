@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HLS Stream Analyzer / Player</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0d1117">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.14/dist/hls.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>HLS Stream Analyzer / Player</h1>
+      <div class="header-actions">
+        <button id="themeToggle" class="chip-btn" type="button">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="controls">
+      <div class="url-input-container">
+        <input id="url" type="url" placeholder="Paste .m3u / .m3u8 / HLS URL" />
+        <button id="clearUrlBtn" type="button" class="history-btn clear-btn" title="Clear URL">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18" />
+            <path d="M6 6l12 12" />
+          </svg>
+        </button>
+        <button id="historyBtn" type="button" class="history-btn" title="View URL History">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6" />
+            <path d="M12 16v6" />
+            <path d="M4 12h-2" />
+            <path d="M22 12h-2" />
+            <path d="M15.54 4.46l-4.24 4.24" />
+            <path d="M8.46 19.54l4.24-4.24" />
+            <path d="M19.54 8.46l-4.24 4.24" />
+            <path d="M4.46 15.54l4.24-4.24" />
+          </svg>
+        </button>
+        <div id="historyDropdown" class="history-dropdown" hidden>
+          <ul id="historyList"></ul>
+        </div>
+      </div>
+
+      <select id="program">
+        <option value="">Program</option>
+      </select>
+
+      <select id="variant">
+        <option value="">Variant</option>
+      </select>
+
+      <button id="loadBtn" type="button">Parse</button>
+      <button id="stopBtn" type="button" class="stop">Stop</button>
+      <button id="resetAppBtn" type="button">Reset</button>
+    </div>
+
+    <div id="playingUrl" class="playing-url">
+      <button id="toggleUrl" type="button" class="chip-btn small">🔗 Show URL</button>
+      <span id="urlText" class="url-text url-hidden" hidden>
+        <span class="sep">|</span>
+        <a id="playingLink" href="#" target="_blank">—</a>
+      </span>
+    </div>
+
+    <video id="video" playsinline controls></video>
+
+    <div class="grid">
+      <div class="info">
+        <h3>Current Segment</h3>
+        <div id="curr">0</div>
+        <span>Kbps</span>
+      </div>
+      <div class="info">
+        <h3>Average Bitrate</h3>
+        <div id="avg">0</div>
+        <span>Kbps</span>
+      </div>
+      <div class="info">
+        <h3>Resolution</h3>
+        <div id="res">—</div>
+      </div>
+      <div class="info">
+        <h3>Segments</h3>
+        <div id="segCount">0</div>
+      </div>
+      <div class="info">
+        <h3>Playing Time</h3>
+        <div id="time">00:00</div>
+      </div>
+      <div class="info">
+        <h3>Buffer Length</h3>
+        <div id="buff">0</div>
+        <span>Sec</span>
+      </div>
+      <div class="info">
+        <h3>Live Latency</h3>
+        <div id="latency">—</div>
+        <span>Sec</span>
+      </div>
+      <div class="info">
+        <h3>Dropped Frames</h3>
+        <div id="dropped">0</div>
+        <span>Count</span>
+      </div>
+      <div class="info">
+        <h3>Buffering Stalls</h3>
+        <div id="stalls">0</div>
+        <span>Count</span>
+      </div>
+    </div>
+
+    <div id="log" class="log"></div>
+
+    <footer class="footer">
+      <span>Developed by <strong>Aourongajab Abir</strong></span>
+      <a href="https://github.com/aouronga" target="_blank" rel="noopener noreferrer">github.com/aouronga</a>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("SW registered"))
+        .catch(err => console.log("SW failed:", err));
+    }
+  </script>
+
+</body>
+
+</html>
