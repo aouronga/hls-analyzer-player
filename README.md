@@ -44,11 +44,11 @@ It supports:
 - Includes icons + manifest.json + service worker
 
 ## 🖼️ Screenshots
-Screenshots stored inside `/screenshots/` directory:
-- Screenshot-1.png  
-- Screenshot-2.png  
-- Screenshot-3.png  
-- Screenshot-4.png  
+
+![Screenshot 1](./screenshots/Screenshot-1.png)
+![Screenshot 2](./screenshots/Screenshot-2.png)
+![Screenshot 3](./screenshots/Screenshot-3.png)
+![Screenshot 4](./screenshots/Screenshot-4.png)
 
 ## 📂 Project Structure
 ```
